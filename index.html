@@ -6,7 +6,7 @@
 <title>Áquila Oliveira</title>
 <meta name="description" content="Áquila Oliveira — Diretor Audiovisual, Artista Visual e Gestor de Operações Criativas. Salvador, Bahia.">
 <meta property="og:title" content="Áquila Oliveira">
-<meta property="og:image" content="images/hero.jpg">
+<meta property="og:image" content="images/head.jpg">
 <link rel="icon" type="image/png" href="images/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -89,9 +89,12 @@ nav.desk a.act{opacity:1;text-decoration:underline;text-underline-offset:5px;tex
 
 /* Hero */
 .hero{position:relative;height:100svh;min-height:560px}
-.hero .ph{position:absolute;inset:0}
+/* Capa em formato cinemascope: faixa larga no topo, nome abaixo */
+.hero .ph{position:absolute;left:0;right:0;top:9svh;height:40svh}
+.hero .ph i{inset:0}
+@media (min-width:900px){ .hero .ph{top:11vh;height:auto;aspect-ratio:1170/293;max-height:46vh} }
 .hero .ph .tag,.p-hero .ph .tag{top:72px;bottom:auto;right:var(--gut)}
-.hero .ph::before{background:linear-gradient(to bottom, rgba(0,0,0,.55) 0, transparent 18%),linear-gradient(to top, rgba(0,0,0,.75) 0, transparent 50%),radial-gradient(ellipse at 50% 40%, transparent 40%, rgba(0,0,0,.5) 100%)}
+.hero .ph::before{background:linear-gradient(to bottom, var(--bg) 0, transparent 15%, transparent 80%, var(--bg) 100%),linear-gradient(to top, rgba(0,0,0,.75) 0, transparent 50%),radial-gradient(ellipse at 50% 40%, transparent 40%, rgba(0,0,0,.5) 100%)}
 .hero-txt{position:absolute;left:var(--gut);right:var(--gut);bottom:28px;z-index:3}
 .hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(76px,21vw,230px);line-height:.86;letter-spacing:-.025em}
 .hero h1 .ln{display:block;overflow:hidden;padding-top:.14em;margin-top:-.14em}
@@ -226,6 +229,7 @@ footer .links{display:flex;gap:22px}
 
 .im-perfil i{background-image:url(images/perfil.jpg)!important}
 .im-hero i{background-image:url(images/hero.jpg)!important}
+.im-head i{background-image:url(images/head.jpg)!important}
 .im-estudio i{background-image:url(images/estudio.jpg)!important}
 .im-palco1 i{background-image:url(images/palco1.jpg)!important}
 .im-palco2 i{background-image:url(images/palco2.jpg)!important}
@@ -263,6 +267,32 @@ footer .links{display:flex;gap:22px}
 .about .ph{aspect-ratio:4/5;max-width:520px}
 .about-txt{font-family:var(--serif);font-size:clamp(26px,3.2vw,44px);line-height:1.15;max-width:18em}
 @media (min-width:900px){ .about{grid-template-columns:5fr 7fr;align-items:end;gap:var(--gut)} }
+
+/* ---------- Galerias em movimento ---------- */
+.ph i.sl{opacity:0;transition:opacity 1.8s ease,clip-path 1.4s var(--ease)}
+.ph i.sl.on{opacity:1}
+.ph.kb-l i.sl{animation:kbL 16s ease-in-out infinite alternate}
+.ph.kb-r i.sl{animation:kbR 18s ease-in-out infinite alternate}
+@keyframes kbL{from{transform:scale(1.1) translate3d(-3%,0,0)}to{transform:scale(1.1) translate3d(3%,-1%,0)}}
+@keyframes kbR{from{transform:scale(1.1) translate3d(3%,-1%,0)}to{transform:scale(1.1) translate3d(-3%,1%,0)}}
+.ph i.drift{animation:drift 22s ease-in-out infinite alternate}
+@keyframes drift{from{transform:scale(1.12) translate3d(-3%,-2%,0)}to{transform:scale(1.12) translate3d(3%,2%,0)}}
+a.ph{display:block;cursor:pointer}
+
+.strip{padding:14vh 0 4vh;overflow:hidden}
+.strip-view{margin-top:40px;overflow:hidden}
+.strip-track{display:flex;gap:14px;width:max-content;animation:strip 90s linear infinite}
+.strip-view:hover .strip-track{animation-play-state:paused}
+@keyframes strip{to{transform:translateX(-50%)}}
+.shot{position:relative;display:block;flex:none;width:62vw;height:52vh;height:52svh;overflow:hidden;background:#111}
+.shot.tall{width:44vw}
+.shot.wide{width:78vw}
+.shot i{position:absolute;inset:-6%;background-size:cover;background-position:center;transition:transform 1.4s var(--ease),filter .6s ease;filter:grayscale(.15) brightness(.85)}
+.shot:hover i{transform:scale(1.06);filter:none}
+.shot span{position:absolute;left:14px;bottom:12px;z-index:1;opacity:.9}
+.shot::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),transparent 40%);pointer-events:none}
+@media (min-width:900px){ .shot{width:30vw;height:64vh} .shot.tall{width:22vw} .shot.wide{width:40vw} }
+@media (prefers-reduced-motion:reduce){ .ph i.sl,.ph i.drift,.strip-track{animation:none!important} }
 </style>
 </head>
 <body>
@@ -298,7 +328,7 @@ footer .links{display:flex;gap:22px}
 <!-- ================= HOME ================= -->
 <main id="home" class="page">
   <section class="hero" id="hero">
-    <div class="ph im im-hero" style="--c1:#0a0a0a;--c2:#333;--c3:#999;--bp:50% 38%"><i></i></div>
+    <a class="ph im kb-l" href="#/projeto/estrutura" data-link data-hover aria-label="Ver projeto" style="--c1:#0a0a0a;--c2:#333;--c3:#999;--bp:66% 45%"><i class="sl on" style="background-image:url(images/head.jpg)"></i></a>
     <div class="hero-txt">
       <h1><span class="ln"><span>Áquila</span></span><span class="ln"><span>Oliveira</span></span></h1>
       <div class="roles cap">
@@ -323,10 +353,15 @@ footer .links{display:flex;gap:22px}
     <a href="#/trabalhos" data-link class="all-link cap rv" data-i18n="allWorks">Ver todos os trabalhos →</a>
   </section>
 
+  <section class="strip" aria-label="Galeria">
+    <div class="sec-head rv"><span class="cap" data-i18n="onset">Em cena</span><span class="cap mute" data-i18n="onsetHint">Clique numa foto para ver o projeto</span></div>
+    <div class="strip-view"><div class="strip-track" id="strip"></div></div>
+  </section>
+
   <section class="vert" id="sobre">
     <span class="cap rv" data-i18n="about">Sobre</span>
     <div class="about">
-      <div class="ph clip im im-retrato" style="--c1:#111;--c2:#333;--c3:#777;--bp:50% 22%"><i></i></div>
+      <div class="ph clip im kb-r" style="--c1:#111;--c2:#333;--c3:#777;--bp:50% 22%"><i class="sl on" style="background-image:url(images/retrato.jpg)"></i></div>
       <div class="about-col"><p class="about-txt rv" data-i18n="aboutTxt"></p><div class="about-body"><p class="rv" data-i18n="aboutP1"></p><p class="rv" data-i18n="aboutP2"></p><p class="rv" data-i18n="aboutP3"></p></div></div>
     </div>
     <span class="cap rv" data-i18n="practice">Prática</span>
@@ -396,11 +431,11 @@ const CATS = {
 const P = [
   {id:"noite-eletrica",t:"Noite Elétrica",client:"Festival Ondas",cat:"realtime",role:{pt:"Direção ao vivo",en:"Live Direction"},y:2025,feat:1,img:"palco1",bp:"50% 40%",stills:["perfil","palco2","estudio"],pal:["#0c0420","#4b1ea8","#ff3d8b"],pos:["50% 30%","85% 75%"]},
   {id:"corpo-de-rua",t:"Corpo de Rua",client:"Selo Ilê Sonoro",cat:"musica",role:{pt:"Direção & Fotografia",en:"Direction & Cinematography"},y:2025,feat:1,pal:["#1a0710","#9c1f3c","#ff8a4c"],pos:["30% 35%","80% 80%"]},
-  {id:"palco-aberto",t:"Palco Aberto",client:"Casa 7",cat:"realtime",role:{pt:"Operações Criativas",en:"Creative Operations"},y:2024,feat:1,img:"palco2",bp:"50% 35%",stills:["palco1","perfil","estudio"],pal:["#170612","#8a1a5c","#ffb36b"],pos:["40% 25%","75% 80%"]},
+  {id:"palco-aberto",t:"Palco Aberto",client:"Casa 7",cat:"realtime",role:{pt:"Operações Criativas",en:"Creative Operations"},y:2024,feat:1,img:"palco2",bp:"50% 35%",stills:["palco1","hero","perfil"],pal:["#170612","#8a1a5c","#ffb36b"],pos:["40% 25%","75% 80%"]},
   {id:"mare-alta",t:"Maré Alta",client:"Atlântica",cat:"campanhas",role:{pt:"Direção",en:"Direction"},y:2026,feat:1,pal:["#06222b","#0e6f7a","#f3c58a"],pos:["78% 22%","15% 85%"]},
   {id:"ladeira",t:"Ladeira",client:"Mar Aberto Records",cat:"musica",role:{pt:"Direção",en:"Direction"},y:2024,pal:["#0f1a0d","#3d6b2a","#e0f08a"],pos:["75% 30%","20% 70%"]},
   {id:"azul-de-itapua",t:"Azul de Itapuã",client:"Sal Têxtil",cat:"campanhas",role:{pt:"Direção",en:"Direction"},y:2024,pal:["#04121f","#1546a0","#8fd1ff"],pos:["30% 25%","80% 85%"]},
-  {id:"estrutura",t:"Estrutura",client:"Festival Ondas",cat:"realtime",role:{pt:"Operações Criativas",en:"Creative Operations"},y:2024,feat:1,img:"estudio",bp:"50% 30%",stills:["perfil","palco1","palco2"],pal:["#0d0d0d","#3a3a3a","#bdbdbd"],pos:["65% 35%","25% 80%"]},
+  {id:"estrutura",t:"Estrutura",client:"Festival Ondas",cat:"realtime",role:{pt:"Operações Criativas",en:"Creative Operations"},y:2024,feat:1,img:"estudio",bp:"50% 30%",stills:["head","perfil","palco1"],pal:["#0d0d0d","#3a3a3a","#bdbdbd"],pos:["65% 35%","25% 80%"]},
   {id:"cidade-baixa",t:"Cidade Baixa",client:"Fundação Ponte",cat:"institucional",role:{pt:"Direção",en:"Direction"},y:2023,pal:["#1a1309","#7a5a1c","#e8c77a"],pos:["70% 40%","20% 80%"]},
   {id:"terreiro",t:"Terreiro",client:"Curta-metragem",cat:"filmes",role:{pt:"Roteiro & Direção",en:"Writing & Direction"},y:2023,pal:["#140805","#6b2410","#d8833f"],pos:["55% 45%","10% 90%"]},
   {id:"origem",t:"Origem",client:"Instituto Recôncavo",cat:"institucional",role:{pt:"Direção",en:"Direction"},y:2022,pal:["#0d0d0d","#4a3a2e","#d9c3a5"],pos:["65% 35%","25% 80%"]}
@@ -409,7 +444,7 @@ const LOGOS = ["Governo Federal", "Sony Music", "ChatGPT", "AFROPUNK", "TV Globo
 const T = {
   pt:{works:"Trabalhos",about:"Sobre",contact:"Contato",close:"Fechar",view:"Ver projeto",scroll:"Role ↓",
     heroTag:"Foto editorial · Áquila olhando para o lado",r1:"Diretor Audiovisual",r2:"Artista Visual",r3:"Gestor de Operações Criativas",
-    aboutTxt:"Áquila Oliveira é diretor audiovisual, artista visual e gestor de operações criativas, com mais de 10 anos de experiência no mercado.",aboutP1:"Sua trajetória reúne direção criativa, publicidade, cinema, música, cultura e comunicação política. Já fez campanhas publicitárias, institucionais e eleitorais, além de videoclipes e projetos para marcas e artistas de diferentes segmentos. Tem uma atuação multidisciplinar e conecta criatividade, tecnologia e estratégia para transformar ideias em narrativas visuais de impacto. Domina todas as etapas da produção, da direção de cena e operação de câmera à edição, motion design, efeitos sonoros e animações 2D e 3D.",aboutP2:"Ao longo da carreira, trabalhou com marcas e instituições como Governo Federal, Sony Music, ChatGPT, AFROPUNK, TV Globo, Bayer, Leroy Merlin, Seda, Petrobahia, IDW, Devassa, Gotemburgo Volvo, UniFTC, Afrolatin Travels e Confederação Baiana de Triathlon. Também realizou projetos de Carnaval com artistas como Anitta, Ludmilla e Xande de Pilares e assinou videoclipes para Xanddy Harmonia, Tony Salles, Parangolé, Olodum, Filhos de Jorge, Dellacruz e Italo Melo. Lidera uma equipe de profissionais de publicidade, marketing e audiovisual, o que garante qualidade, eficiência e uma abordagem estratégica em cada entrega.",aboutP3:"Na área da música, atua como produtor executivo e integra o grupo Primeira Capital. Acredita no audiovisual como ferramenta de expressão, conexão e transformação social, e trabalha para aproximar marcas e públicos de forma autêntica e memorável.",selected:"Trabalhos selecionados",allWorks:"Ver todos os trabalhos →",practice:"Prática",clients:"Clientes & parceiros",
+    aboutTxt:"Áquila Oliveira é diretor audiovisual, artista visual e gestor de operações criativas, com mais de 10 anos de experiência no mercado.",aboutP1:"Sua trajetória reúne direção criativa, publicidade, cinema, música, cultura e comunicação política. Já fez campanhas publicitárias, institucionais e eleitorais, além de videoclipes e projetos para marcas e artistas de diferentes segmentos. Tem uma atuação multidisciplinar e conecta criatividade, tecnologia e estratégia para transformar ideias em narrativas visuais de impacto. Domina todas as etapas da produção, da direção de cena e operação de câmera à edição, motion design, efeitos sonoros e animações 2D e 3D.",aboutP2:"Ao longo da carreira, trabalhou com marcas e instituições como Governo Federal, Sony Music, ChatGPT, AFROPUNK, TV Globo, Bayer, Leroy Merlin, Seda, Petrobahia, IDW, Devassa, Gotemburgo Volvo, UniFTC, Afrolatin Travels e Confederação Baiana de Triathlon. Também realizou projetos de Carnaval com artistas como Anitta, Ludmilla e Xande de Pilares e assinou videoclipes para Xanddy Harmonia, Tony Salles, Parangolé, Olodum, Filhos de Jorge, Dellacruz e Italo Melo. Lidera uma equipe de profissionais de publicidade, marketing e audiovisual, o que garante qualidade, eficiência e uma abordagem estratégica em cada entrega.",aboutP3:"Na área da música, atua como produtor executivo e integra o grupo Primeira Capital. Acredita no audiovisual como ferramenta de expressão, conexão e transformação social, e trabalha para aproximar marcas e públicos de forma autêntica e memorável.",onset:"Em cena",onsetHint:"Clique numa foto para ver o projeto",selected:"Trabalhos selecionados",allWorks:"Ver todos os trabalhos →",practice:"Prática",clients:"Clientes & parceiros",
     v1t:"Direção Audiovisual",v1p:"Campanhas publicitárias, institucionais e eleitorais, videoclipes e Carnaval — da direção de cena à operação de câmera.",v1a:"Publicidade",v1b:"Videoclipe",v1c:"Carnaval",
     v2t:"Artista Visual",v2p:"Edição, motion design, efeitos sonoros e animações 2D e 3D. Criatividade e tecnologia a serviço da narrativa.",v2a:"Motion Design",v2b:"Animação 2D e 3D",v2c:"Edição",
     v3t:"Operações Criativas",v3p:"Uma equipe de publicidade, marketing e audiovisual com abordagem estratégica: qualidade e eficiência em cada entrega.",v3a:"Liderança de equipe",v3b:"Gestão de produção",v3c:"Produção executiva",
@@ -419,7 +454,7 @@ const T = {
     lead:"Um filme sobre pertencimento, filmado em luz natural entre o fim da tarde e a primeira hora da noite.",still:"Still"},
   en:{works:"Work",about:"About",contact:"Contact",close:"Close",view:"View project",scroll:"Scroll ↓",
     heroTag:"Editorial photo · Áquila looking aside",r1:"Film Director",r2:"Visual Artist",r3:"Creative Operations Lead",
-    aboutTxt:"Áquila Oliveira is a film director, visual artist and creative operations lead with more than 10 years of experience in the industry.",aboutP1:"His work spans creative direction, advertising, film, music, culture and political communication. He has made advertising, institutional and electoral campaigns, as well as music videos and projects for brands and artists across different fields. With a multidisciplinary practice, he connects creativity, technology and strategy to turn ideas into visual narratives with impact. He masters every stage of production, from directing and camera operation to editing, motion design, sound effects and 2D and 3D animation.",aboutP2:"Throughout his career he has worked with brands and institutions such as the Brazilian Federal Government, Sony Music, ChatGPT, AFROPUNK, TV Globo, Bayer, Leroy Merlin, Seda, Petrobahia, IDW, Devassa, Gotemburgo Volvo, UniFTC, Afrolatin Travels and the Bahia Triathlon Confederation. He has also delivered Carnival projects with artists such as Anitta, Ludmilla and Xande de Pilares, and directed music videos for Xanddy Harmonia, Tony Salles, Parangolé, Olodum, Filhos de Jorge, Dellacruz and Italo Melo. He leads a team of advertising, marketing and film professionals, ensuring quality, efficiency and a strategic approach in every delivery.",aboutP3:"In music, he works as an executive producer and is part of the group Primeira Capital. He believes in film as a tool for expression, connection and social transformation, and works to bring brands and audiences together in an authentic, memorable way.",selected:"Selected work",allWorks:"See all work →",practice:"Practice",clients:"Clients & partners",
+    aboutTxt:"Áquila Oliveira is a film director, visual artist and creative operations lead with more than 10 years of experience in the industry.",aboutP1:"His work spans creative direction, advertising, film, music, culture and political communication. He has made advertising, institutional and electoral campaigns, as well as music videos and projects for brands and artists across different fields. With a multidisciplinary practice, he connects creativity, technology and strategy to turn ideas into visual narratives with impact. He masters every stage of production, from directing and camera operation to editing, motion design, sound effects and 2D and 3D animation.",aboutP2:"Throughout his career he has worked with brands and institutions such as the Brazilian Federal Government, Sony Music, ChatGPT, AFROPUNK, TV Globo, Bayer, Leroy Merlin, Seda, Petrobahia, IDW, Devassa, Gotemburgo Volvo, UniFTC, Afrolatin Travels and the Bahia Triathlon Confederation. He has also delivered Carnival projects with artists such as Anitta, Ludmilla and Xande de Pilares, and directed music videos for Xanddy Harmonia, Tony Salles, Parangolé, Olodum, Filhos de Jorge, Dellacruz and Italo Melo. He leads a team of advertising, marketing and film professionals, ensuring quality, efficiency and a strategic approach in every delivery.",aboutP3:"In music, he works as an executive producer and is part of the group Primeira Capital. He believes in film as a tool for expression, connection and social transformation, and works to bring brands and audiences together in an authentic, memorable way.",onset:"On set",onsetHint:"Click a photo to see the project",selected:"Selected work",allWorks:"See all work →",practice:"Practice",clients:"Clients & partners",
     v1t:"Film Direction",v1p:"Advertising, institutional and electoral campaigns, music videos and Carnival — from directing to camera operation.",v1a:"Advertising",v1b:"Music video",v1c:"Carnival",
     v2t:"Visual Artist",v2p:"Editing, motion design, sound effects and 2D and 3D animation. Creativity and technology in service of the story.",v2a:"Motion Design",v2b:"2D & 3D Animation",v2c:"Editing",
     v3t:"Creative Operations",v3p:"A team of advertising, marketing and film professionals with a strategic approach: quality and efficiency in every delivery.",v3a:"Team leadership",v3b:"Production management",v3c:"Executive production",
@@ -434,7 +469,17 @@ let lang = "pt", filter = "todos";
 try{ lang = localStorage.getItem("ao-lang") || "pt"; }catch(e){}
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 const t = k => T[lang][k];
-const ph = (p, tag="") => `<div class="ph clip${p.img?` im im-${p.img}`:""}" style="--c1:${p.pal[0]};--c2:${p.pal[1]};--c3:${p.pal[2]};--p1:${p.pos[0]};--p2:${p.pos[1]};--bp:${p.bp||"center"}"><i></i>${tag?`<span class="tag">${tag}</span>`:""}</div>`;
+/* Mídia: com várias fotos vira galeria (crossfade + deslize lento); sem foto, degradê em movimento */
+let slideSeq = 0;
+const ph = (p, tag="", single=false) => {
+  const imgs = p.img ? [p.img, ...(single ? [] : (p.stills||[]))].filter((v,i,a)=>a.indexOf(v)===i) : [];
+  const dir = (slideSeq++ % 2) ? "r" : "l";
+  const style = `--c1:${p.pal[0]};--c2:${p.pal[1]};--c3:${p.pal[2]};--p1:${p.pos[0]};--p2:${p.pos[1]};--bp:${p.bp||"center"}`;
+  const layers = imgs.length
+    ? imgs.map((n,i)=>`<i class="sl${i===0?" on":""}" style="background-image:url(images/${n}.jpg)"></i>`).join("")
+    : `<i class="drift"></i>`;
+  return `<div class="ph clip${imgs.length?" im":""} kb-${dir}"${imgs.length>1?` data-slides="${imgs.length}"`:""} style="${style}">${layers}${tag?`<span class="tag">${tag}</span>`:""}</div>`;
+};
 const cat = c => CATS[c][lang];
 
 /* ---------------- Reveal observer ---------------- */
@@ -449,6 +494,15 @@ function renderI18n(){
   $$("[data-lang]").forEach(b => b.classList.toggle("on", b.dataset.lang === lang));
   $("#manifestoText").innerHTML = t("manifesto").split(" ").map((w,i,a) => `<span class="w${i>=a.length-3?" hl":""}">${w}</span>`).join(" ");
   manifesto();
+}
+function renderStrip(){
+  const seen = new Set(), items = [];
+  const add = (n, p) => { if(n && !seen.has(n)){ seen.add(n); items.push({n, p}); } };
+  P.forEach(p => add(p.img, p));                       // cada capa leva ao seu projeto
+  P.forEach(p => (p.stills||[]).forEach(n => add(n, p))); // fotos extras: primeiro projeto que as usa
+  const html = items.map(({n,p},i) => `<a class="shot ${i%3===1?"tall":i%3===2?"wide":""}" href="#/projeto/${p.id}" data-link data-hover>
+      <i style="background-image:url(images/${n}.jpg)"></i><span class="cap">${p.t}</span></a>`).join("");
+  $("#strip").innerHTML = html + html;
 }
 function renderFeat(){
   $("#featList").innerHTML = P.filter(p => p.feat).map((p,i) => `
@@ -498,7 +552,7 @@ function renderGrid(){
 function renderProject(id){
   const idx = Math.max(0, P.findIndex(p => p.id === id)), p = P[idx], nx = P[(idx+1) % P.length];
   const v = (a,b,c) => ({...p, img:null, pal:[a,b,c]});
-  const st = (i, fb, tag) => p.stills && p.stills[i] ? ph({...p, img:p.stills[i], bp:"50% 35%"}) : ph(fb, tag);
+  const st = (i, fb, tag) => p.stills && p.stills[i] ? ph({...p, img:p.stills[i], bp:"50% 35%"}, "", true) : ph(fb, tag);
   $("#projeto").innerHTML = `
     <section class="p-hero">${ph(p, p.img ? "" : "Hero still / vídeo")}
       <div class="txt"><span class="cap rv">${cat(p.cat)}</span><h1 class="rv">${p.t}</h1></div></section>
@@ -586,8 +640,23 @@ document.addEventListener("mousemove", e => {
 });
 document.addEventListener("mouseleave", () => cur.classList.remove("on"));
 
+/* ---------------- Galerias ---------------- */
+function startSlides(){
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  let tick = 0;
+  setInterval(() => {
+    tick++;
+    $$(".ph[data-slides]").forEach((el, k) => {
+      if (!el.classList.contains("in") || (tick + k) % 3) return;
+      const r = el.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return;
+      const ls = el.querySelectorAll("i.sl"), cur = [...ls].findIndex(x => x.classList.contains("on"));
+      ls[cur].classList.remove("on"); ls[(cur + 1) % ls.length].classList.add("on");
+    });
+  }, 1800);
+}
+
 /* ---------------- Init ---------------- */
-renderI18n(); renderFeat(); renderMarquee(); go();
+renderI18n(); renderFeat(); renderStrip(); renderMarquee(); go(); startSlides();
 </script>
 </body>
 </html>
