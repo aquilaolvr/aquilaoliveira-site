@@ -222,18 +222,19 @@ footer .links{display:flex;gap:22px}
 
 /* ---------- Fotos reais (embutidas) ---------- */
 .ph.im i{background-size:cover!important;background-position:var(--bp,center)!important;background-repeat:no-repeat!important}
-.im-crianca1 i{background-image:url(images/crianca1.jpg)!important}
-.im-crianca2 i{background-image:url(images/crianca2.jpg)!important}
+
+
 .im-perfil i{background-image:url(images/perfil.jpg)!important}
 .im-hero i{background-image:url(images/hero.jpg)!important}
+.im-estudio i{background-image:url(images/estudio.jpg)!important}
 .im-palco1 i{background-image:url(images/palco1.jpg)!important}
 .im-palco2 i{background-image:url(images/palco2.jpg)!important}
 .im-retrato i{background-image:url(images/retrato.jpg)!important}
-.im-serra1 i{background-image:url(images/serra1.jpg)!important}
-.im-serra2 i{background-image:url(images/serra2.jpg)!important}
-.im-trico1 i{background-image:url(images/trico1.jpg)!important}
-.im-trico2 i{background-image:url(images/trico2.jpg)!important}
-.im-trico3 i{background-image:url(images/trico3.jpg)!important}
+
+
+
+
+
 
 .hero.go .ph i{transform:scale(1);transition:transform 4s var(--ease)}
 .about-body{display:grid;gap:18px;margin-top:32px;max-width:40em}
@@ -393,15 +394,13 @@ const CATS = {
   institucional:{pt:"Institucional",en:"Institutional"}
 };
 const P = [
-  {id:"noite-eletrica",t:"Noite Elétrica",client:"Festival Ondas",cat:"realtime",role:{pt:"Direção ao vivo",en:"Live Direction"},y:2025,feat:1,img:"palco1",bp:"50% 40%",stills:["perfil","palco2","palco1"],pal:["#0c0420","#4b1ea8","#ff3d8b"],pos:["50% 30%","85% 75%"]},
-  {id:"corpo-de-rua",t:"Corpo de Rua",client:"Selo Ilê Sonoro",cat:"musica",role:{pt:"Direção & Fotografia",en:"Direction & Cinematography"},y:2025,feat:1,img:"crianca1",bp:"50% 35%",stills:["crianca2","palco1","palco2"],pal:["#1a0710","#9c1f3c","#ff8a4c"],pos:["30% 35%","80% 80%"]},
-  {id:"tricolor",t:"Tricolor",client:"Série documental",cat:"filmes",role:{pt:"Direção & Fotografia",en:"Direction & Cinematography"},y:2025,feat:1,img:"trico1",bp:"50% 30%",stills:["trico3","trico2","trico1"],pal:["#04121f","#1546a0","#8fd1ff"],pos:["30% 25%","80% 85%"]},
-  {id:"serra-da-chapadinha",t:"Serra da Chapadinha",client:"Registro documental",cat:"filmes",role:{pt:"Direção & Fotografia",en:"Direction & Cinematography"},y:2025,feat:1,img:"serra1",bp:"50% 40%",stills:["serra2","serra1"],pal:["#1a1309","#7a5a1c","#e8c77a"],pos:["70% 40%","20% 80%"]},
-  {id:"palco-aberto",t:"Palco Aberto",client:"Casa 7",cat:"realtime",role:{pt:"Operações Criativas",en:"Creative Operations"},y:2024,feat:1,img:"palco2",bp:"50% 35%",stills:["palco1","perfil"],pal:["#170612","#8a1a5c","#ffb36b"],pos:["40% 25%","75% 80%"]},
-  {id:"mare-alta",t:"Maré Alta",client:"Atlântica",cat:"campanhas",role:{pt:"Direção",en:"Direction"},y:2026,pal:["#06222b","#0e6f7a","#f3c58a"],pos:["78% 22%","15% 85%"]},
-  {id:"ladeira",t:"Ladeira",client:"Mar Aberto Records",cat:"musica",role:{pt:"Direção",en:"Direction"},y:2024,img:"crianca2",bp:"50% 35%",stills:["crianca1","palco2"],pal:["#0f1a0d","#3d6b2a","#e0f08a"],pos:["75% 30%","20% 70%"]},
+  {id:"noite-eletrica",t:"Noite Elétrica",client:"Festival Ondas",cat:"realtime",role:{pt:"Direção ao vivo",en:"Live Direction"},y:2025,feat:1,img:"palco1",bp:"50% 40%",stills:["perfil","palco2","estudio"],pal:["#0c0420","#4b1ea8","#ff3d8b"],pos:["50% 30%","85% 75%"]},
+  {id:"corpo-de-rua",t:"Corpo de Rua",client:"Selo Ilê Sonoro",cat:"musica",role:{pt:"Direção & Fotografia",en:"Direction & Cinematography"},y:2025,feat:1,pal:["#1a0710","#9c1f3c","#ff8a4c"],pos:["30% 35%","80% 80%"]},
+  {id:"palco-aberto",t:"Palco Aberto",client:"Casa 7",cat:"realtime",role:{pt:"Operações Criativas",en:"Creative Operations"},y:2024,feat:1,img:"palco2",bp:"50% 35%",stills:["palco1","perfil","estudio"],pal:["#170612","#8a1a5c","#ffb36b"],pos:["40% 25%","75% 80%"]},
+  {id:"mare-alta",t:"Maré Alta",client:"Atlântica",cat:"campanhas",role:{pt:"Direção",en:"Direction"},y:2026,feat:1,pal:["#06222b","#0e6f7a","#f3c58a"],pos:["78% 22%","15% 85%"]},
+  {id:"ladeira",t:"Ladeira",client:"Mar Aberto Records",cat:"musica",role:{pt:"Direção",en:"Direction"},y:2024,pal:["#0f1a0d","#3d6b2a","#e0f08a"],pos:["75% 30%","20% 70%"]},
   {id:"azul-de-itapua",t:"Azul de Itapuã",client:"Sal Têxtil",cat:"campanhas",role:{pt:"Direção",en:"Direction"},y:2024,pal:["#04121f","#1546a0","#8fd1ff"],pos:["30% 25%","80% 85%"]},
-  {id:"estrutura",t:"Estrutura",client:"Festival Ondas",cat:"realtime",role:{pt:"Operações Criativas",en:"Creative Operations"},y:2024,img:"perfil",bp:"50% 35%",stills:["palco1","palco2"],pal:["#0d0d0d","#3a3a3a","#bdbdbd"],pos:["65% 35%","25% 80%"]},
+  {id:"estrutura",t:"Estrutura",client:"Festival Ondas",cat:"realtime",role:{pt:"Operações Criativas",en:"Creative Operations"},y:2024,feat:1,img:"estudio",bp:"50% 30%",stills:["perfil","palco1","palco2"],pal:["#0d0d0d","#3a3a3a","#bdbdbd"],pos:["65% 35%","25% 80%"]},
   {id:"cidade-baixa",t:"Cidade Baixa",client:"Fundação Ponte",cat:"institucional",role:{pt:"Direção",en:"Direction"},y:2023,pal:["#1a1309","#7a5a1c","#e8c77a"],pos:["70% 40%","20% 80%"]},
   {id:"terreiro",t:"Terreiro",client:"Curta-metragem",cat:"filmes",role:{pt:"Roteiro & Direção",en:"Writing & Direction"},y:2023,pal:["#140805","#6b2410","#d8833f"],pos:["55% 45%","10% 90%"]},
   {id:"origem",t:"Origem",client:"Instituto Recôncavo",cat:"institucional",role:{pt:"Direção",en:"Direction"},y:2022,pal:["#0d0d0d","#4a3a2e","#d9c3a5"],pos:["65% 35%","25% 80%"]}
