@@ -332,6 +332,14 @@ a.ph{display:block;cursor:pointer}
 .p-hero .ph::before{display:none}
 .p-hero .ph i.sl.art{background-size:cover!important}
 @media (prefers-reduced-motion:reduce){ .vthumb video{clip-path:none!important} }
+
+/* ---------- Resultados ---------- */
+.results{padding:10vh var(--gut) 0}
+.res-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px var(--gut);margin-top:28px;padding-top:28px;border-top:1px solid transparent;border-image:var(--grad) 1}
+@media (min-width:900px){ .res-grid{grid-template-columns:repeat(4,1fr)} }
+.res b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(40px,5vw,76px);line-height:1;letter-spacing:-.02em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.res .cap{display:block;margin-top:10px}
+.res-src{margin-top:28px}
 </style>
 </head>
 <body>
@@ -472,7 +480,7 @@ const T = {
     closing:"Vamos filmar algo <em>juntos?</em>",
     manifesto:"Filmo o que não cabe em palavras: a luz, o gesto e o tempo de quem está diante da câmera.",
     client:"Cliente",category:"Categoria",role:"Função",year:"Ano",next:"Próximo projeto",empty:"Nenhum projeto nesta categoria — ainda.",
-    still:"Still",stats:"51 obras · 4 frentes · 2014 — 2026",traj:"Trajetória",form:"Formação",watch:"Assista",soon:"Vídeo e imagens em breve.",front:"Frente",group:"Grupo",whats:"WhatsApp"},
+    still:"Still",results:"Resultados",source:"Fonte",updated:"atualizado em",stats:"51 obras · 4 frentes · 2014 — 2026",traj:"Trajetória",form:"Formação",watch:"Assista",soon:"Vídeo e imagens em breve.",front:"Frente",group:"Grupo",whats:"WhatsApp"},
   en:{works:"Work",about:"About",contact:"Contact",close:"Close",view:"View project",scroll:"Scroll ↓",
     heroTag:"Editorial photo · Áquila looking aside",r1:"Film Director",r2:"Visual Artist",r3:"Creative Operations Lead",
     aboutTxt:"Áquila Oliveira is a film director, visual artist and creative operations lead with more than 10 years of experience in the industry.",aboutP1:"His work spans creative direction, advertising, film, music, culture and political communication. He has made advertising, institutional and electoral campaigns, as well as music videos and projects for brands and artists across different fields. With a multidisciplinary practice, he connects creativity, technology and strategy to turn ideas into visual narratives with impact. He masters every stage of production, from directing and camera operation to editing, motion design, sound effects and 2D and 3D animation.",aboutP2:"Throughout his career he has worked with brands and institutions such as the Brazilian Federal Government, Sony Music, ChatGPT, AFROPUNK, TV Globo, Bayer, Leroy Merlin, Seda, Petrobahia, IDW, Devassa, Gotemburgo Volvo, UniFTC, Afrolatin Travels and the Bahia Triathlon Confederation. He has also delivered Carnival projects with artists such as Anitta, Ludmilla and Xande de Pilares, and directed music videos for Xanddy Harmonia, Tony Salles, Parangolé, Olodum, Filhos de Jorge, Dellacruz and Italo Melo. He leads a team of advertising, marketing and film professionals, ensuring quality, efficiency and a strategic approach in every delivery.",aboutP3:"In music, he works as an executive producer and is part of the group Primeira Capital. He believes in film as a tool for expression, connection and social transformation, and works to bring brands and audiences together in an authentic, memorable way.",onset:"On set",onsetHint:"Click a photo to see the project",selected:"Selected work",allWorks:"See all work →",practice:"Practice",clients:"Clients & partners",
@@ -482,7 +490,7 @@ const T = {
     closing:"Shall we film something <em>together?</em>",
     manifesto:"I film what words can't hold: the light, the gesture and the time of whoever stands before the camera.",
     client:"Client",category:"Category",role:"Role",year:"Year",next:"Next project",empty:"No projects in this category — yet.",
-    still:"Still",stats:"51 works · 4 fields · 2014 — 2026",traj:"Career",form:"Education",watch:"Watch",soon:"Video and images coming soon.",front:"Field",group:"Group",whats:"WhatsApp"}
+    still:"Still",results:"Results",source:"Source",updated:"updated",stats:"51 works · 4 fields · 2014 — 2026",traj:"Career",form:"Education",watch:"Watch",soon:"Video and images coming soon.",front:"Field",group:"Group",whats:"WhatsApp"}
 };
 
 /* ---------------- State & helpers ---------------- */
@@ -572,6 +580,46 @@ function renderGrid(){
   $("#grid").innerHTML = `<div class="grid3">${list.map(card).join("")}</div>`;
   observe($("#grid")); watchClips($("#grid"));
 }
+/* ---------------- Resultados ----------------
+   Automático: data/resultados.json (gerado todo dia pelo GitHub a partir do YouTube).
+   Manual: campo "resultados" do projeto em js/projetos.js (tem prioridade). */
+let AUTO = {};
+const METRICS = [
+  ["views",{pt:"Views",en:"Views"}], ["alcance",{pt:"Alcance",en:"Reach"}], ["impressoes",{pt:"Impressões",en:"Impressions"}],
+  ["publico",{pt:"Público",en:"Audience"}], ["curtidas",{pt:"Curtidas",en:"Likes"}], ["comentarios",{pt:"Comentários",en:"Comments"}],
+  ["compartilhamentos",{pt:"Compartilhamentos",en:"Shares"}], ["salvamentos",{pt:"Salvamentos",en:"Saves"}]
+];
+const fmt = n => {
+  const loc = lang === "pt" ? "pt-BR" : "en-US";
+  return n >= 1e6 ? new Intl.NumberFormat(loc,{maximumFractionDigits:1}).format(n/1e6) + (lang==="pt"?" mi":"M")
+                  : new Intl.NumberFormat(loc).format(n);
+};
+function resultsBlock(p){
+  const auto = AUTO[p.id] || {}, man = p.resultados || {};
+  const rows = METRICS.map(([k,l]) => {
+    const v = man[k] != null ? man[k] : auto[k];
+    return v != null && v !== "" && !isNaN(v) ? `<div class="res rv"><b data-count="${+v}">${fmt(+v)}</b><span class="cap mute">${l[lang]}</span></div>` : "";
+  }).join("");
+  if (!rows) return "";
+  const src = [man.fonte, auto.fonte && Object.keys(auto).some(k => man[k] == null && k !== "fonte" && k !== "atualizado") ? auto.fonte : ""].filter(Boolean).join(" · ");
+  const when = auto.atualizado ? ` · ${t("updated")} ${new Date(auto.atualizado).toLocaleDateString(lang==="pt"?"pt-BR":"en-US")}` : "";
+  return `<section class="results"><span class="cap rv">${t("results")}</span><div class="res-grid">${rows}</div>
+    ${src || when ? `<p class="cap mute res-src rv">${t("source")}: ${src}${when}</p>` : ""}</section>`;
+}
+/* números contam do zero quando aparecem */
+const cio = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; cio.unobserve(e.target);
+  const el = e.target, end = +el.dataset.count, t0 = performance.now(), d = 1400;
+  const step = now => { const k = Math.min(1,(now-t0)/d), v = Math.round(end*(1-Math.pow(1-k,3))); el.textContent = fmt(v); if(k<1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+}), {threshold:.5});
+function loadResults(){
+  fetch("data/resultados.json", {cache:"no-cache"}).then(r => r.ok ? r.json() : {}).then(j => {
+    AUTO = (j && j.projetos) || {};
+    if ($("#projeto").classList.contains("show")) renderProject(parse().id);
+  }).catch(() => {});
+}
+
 function renderProject(id){
   const idx = Math.max(0, P.findIndex(p => p.id === id)), p = P[idx], nx = P[(idx+1) % P.length];
   const stills = (p.stills || []).filter(n => n !== p.img);
@@ -591,6 +639,7 @@ function renderProject(id){
       <div class="rv"><span class="cap mute">${t("role")}</span><p>${p.role[lang]}</p></div>
       <div class="rv"><span class="cap mute">${t("year")}</span><p>${p.y || "—"}</p></div>
     </section>
+    ${resultsBlock(p)}
     <section class="p-body">
       <p class="lead rv">${p.role[lang]}</p>
       ${media}${gallery}
@@ -599,6 +648,7 @@ function renderProject(id){
     <a class="next" href="#/projeto/${nx.id}" data-link data-hover><span class="cap mute">${t("next")} · ${nx.n}</span><h2>${nx.t}</h2></a>
     <footer class="cap mute"><span>© 2026 Áquila Oliveira · Salvador, BA</span><div class="links"><a href="https://www.instagram.com/aquilaolvr/" target="_blank" rel="noopener">Instagram</a><a href="https://www.youtube.com/@aquilaolvr" target="_blank" rel="noopener">YouTube</a><a href="http://behance.net/aquilaolvr" target="_blank" rel="noopener">Behance</a><a href="https://www.linkedin.com/in/%C3%A1quila-oliveira-b5578518a/" target="_blank" rel="noopener">LinkedIn</a></div></footer>`;
   observe($("#projeto")); watchClips($("#projeto"));
+  $$("#projeto [data-count]").forEach(el => cio.observe(el));
 }
 
 /* ---------------- Manifesto (word by word on scroll) ---------------- */
@@ -685,7 +735,7 @@ function startSlides(){
 }
 
 /* ---------------- Init ---------------- */
-renderI18n(); renderFeat(); renderStrip(); renderMarquee(); go(); startSlides();
+renderI18n(); renderFeat(); renderStrip(); renderMarquee(); go(); startSlides(); loadResults();
 </script>
 </body>
 </html>

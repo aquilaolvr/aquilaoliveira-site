@@ -13,7 +13,14 @@
      img     capa (caminho dentro de images/, sem .jpg)
      stills  mais fotos do projeto (viram galeria)
      clip    loop curto da thumb (arquivo em video/, sem .mp4) — toca sozinho, sem som
-     video   ID do vídeo no YouTube (ex.: "dQw4w9WgXcQ") — opcional
+     youtube link (ou ID) do vídeo no YouTube — mostra o player e busca
+             views, curtidas e comentários automaticamente todo dia
+     resultados  números que você coloca à mão (print do cliente, relatório…).
+             Ex.: resultados: { views: 10000, alcance: 45000, compartilhamentos: 410, fonte: "Instagram do cliente" }
+             Chaves aceitas: views, alcance, impressoes, curtidas, comentarios,
+             compartilhamentos, salvamentos, publico. O que você colocar aqui
+             tem prioridade sobre o número automático.
+     video   (antigo) ID do vídeo no YouTube — use "youtube"
      vimeo   ID do vídeo no Vimeo — opcional
      feat    1 = aparece nos destaques da Home
    ===================================================================== */
@@ -38,6 +45,11 @@ const SUBS = {
 };
 
 const r = (pt, en) => ({ pt, en });
+/* Aceita link do YouTube em qualquer formato ou só o ID */
+function ytId(v) {
+  const m = String(v).match(/(?:v=|youtu\.be\/|shorts\/|embed\/|live\/)([\w-]{11})/);
+  return m ? m[1] : String(v).trim();
+}
 const cover = n => "projetos/" + n.replace(".", "-");
 
 const P = [
@@ -142,6 +154,7 @@ const P = [
   if (!p.img) p.img = card;
   else if (!(p.stills || []).includes(card)) p.stills = [card, ...(p.stills || [])];
   p.bp = p.bp || "50% 50%";
+  if (p.youtube) p.video = ytId(p.youtube);
   p.pal = p.pal || ["#140805", "#b8441c", "#f0b46a"];
   p.pos = p.pos || ["70% 30%", "20% 80%"];
   return p;
