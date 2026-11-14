@@ -119,8 +119,8 @@ nav.desk a.act{opacity:1;text-decoration:underline;text-underline-offset:5px;tex
 .sec-head{display:flex;justify-content:space-between;align-items:baseline;padding:0 var(--gut) 22px;border-bottom:1px solid var(--line);margin:0 var(--gut);padding-left:0;padding-right:0}
 .feat{padding:12vh 0 4vh}
 .proj{display:block;padding:0 var(--gut);margin-top:9vh;cursor:pointer}
-.proj .ph{height:72svh;min-height:380px}
-@media (min-width:900px){ .proj .ph{height:88vh} }
+.proj .ph{aspect-ratio:16/9}
+
 .proj:hover .ph.in i{transform:scale(1.03)}
 .proj-meta{display:grid;gap:10px;margin-top:18px}
 .proj-meta h3{font-family:var(--serif);font-weight:400;font-size:clamp(40px,8vw,120px);line-height:.95;letter-spacing:-.02em}
@@ -182,23 +182,22 @@ footer .links{display:flex;gap:22px}
 .row{margin-bottom:12vh}
 .row.pair{display:grid;gap:12vh}
 .card{display:block;cursor:pointer}
-.card .ph{aspect-ratio:4/5}
-.row.full .card .ph{aspect-ratio:4/5}
+.card .ph{aspect-ratio:16/9}
+.row.full .card .ph{aspect-ratio:16/9}
 .card .meta{display:flex;justify-content:space-between;gap:16px;margin-top:14px;align-items:baseline}
 .card h3{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.4vw,52px);line-height:1}
 .card .sub{margin-top:8px}
 .card:hover .ph.in i{transform:scale(1.03)}
 .empty{padding:10vh 0;font-family:var(--serif);font-size:32px;color:var(--mute)}
 @media (min-width:900px){
-  .row.full .card .ph{aspect-ratio:21/9}
+  .row.full .card .ph{aspect-ratio:16/9}
   .row.full .card h3{font-size:clamp(48px,6vw,96px)}
   .row.pair{grid-template-columns:7fr 5fr;gap:var(--gut);align-items:start}
   .row.pair .card:nth-child(2){margin-top:22vh}
   .row.pair.rev{grid-template-columns:5fr 7fr}
   .row.pair.rev .card:nth-child(1){margin-top:22vh}
   .row.pair.rev .card:nth-child(2){margin-top:0}
-  .row.pair .card .ph{aspect-ratio:4/5}
-  .row.pair .card:nth-child(odd) .ph{aspect-ratio:5/6}
+  .row.pair .card .ph{aspect-ratio:16/9}
 }
 
 /* ---------- Projeto ---------- */
@@ -293,6 +292,26 @@ a.ph{display:block;cursor:pointer}
 .shot::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),transparent 40%);pointer-events:none}
 @media (min-width:900px){ .shot{width:30vw;height:64vh} .shot.tall{width:22vw} .shot.wide{width:40vw} }
 @media (prefers-reduced-motion:reduce){ .ph i.sl,.ph i.drift,.strip-track{animation:none!important} }
+
+/* ---------- Portfólio 2014 — 2026 ---------- */
+.stats{margin-top:18px}
+.whats{display:inline-block;margin-top:22px;opacity:.8}
+.whats:hover{opacity:1}
+.traj-h{display:block;margin:44px 0 16px}
+.traj{list-style:none;display:grid;gap:0;border-top:1px solid var(--line)}
+.traj li{display:grid;gap:6px;padding:16px 0;border-bottom:1px solid var(--line)}
+.traj li p,.form{font-size:15px;line-height:1.5}
+@media (min-width:900px){ .traj li{grid-template-columns:200px 1fr;align-items:baseline} }
+.video{position:relative;aspect-ratio:16/9;background:#000}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.stills{display:grid;gap:var(--gut)}
+.stills .ph{aspect-ratio:16/10}
+@media (min-width:900px){ .stills{grid-template-columns:1fr 1fr} .stills .ph:first-child{grid-column:1/-1;aspect-ratio:16/8} }
+.soon{padding:4vh 0}
+/* Cards gráficos do portfólio: sem corte, só um respiro lento (o texto do card fica inteiro) */
+.ph i.sl.art{inset:0;transform-origin:100% 0;animation:art 14s ease-in-out infinite alternate!important}
+@keyframes art{from{transform:scale(1)}to{transform:scale(1.05)}}
+.p-hero .ph i.sl.art{background-size:contain!important;background-color:#0a0a0a}
 </style>
 </head>
 <body>
@@ -328,7 +347,7 @@ a.ph{display:block;cursor:pointer}
 <!-- ================= HOME ================= -->
 <main id="home" class="page">
   <section class="hero" id="hero">
-    <a class="ph im kb-l" href="#/projeto/estrutura" data-link data-hover aria-label="Ver projeto" style="--c1:#0a0a0a;--c2:#333;--c3:#999;--bp:66% 45%"><i class="sl on" style="background-image:url(images/head.jpg)"></i></a>
+    <a class="ph im kb-l" href="#/projeto/delacruz" data-link data-hover aria-label="Ver projeto" style="--c1:#0a0a0a;--c2:#333;--c3:#999;--bp:66% 45%"><i class="sl on" style="background-image:url(images/head.jpg)"></i></a>
     <div class="hero-txt">
       <h1><span class="ln"><span>Áquila</span></span><span class="ln"><span>Oliveira</span></span></h1>
       <div class="roles cap">
@@ -362,7 +381,7 @@ a.ph{display:block;cursor:pointer}
     <span class="cap rv" data-i18n="about">Sobre</span>
     <div class="about">
       <div class="ph clip im kb-r" style="--c1:#111;--c2:#333;--c3:#777;--bp:50% 22%"><i class="sl on" style="background-image:url(images/retrato.jpg)"></i></div>
-      <div class="about-col"><p class="about-txt rv" data-i18n="aboutTxt"></p><div class="about-body"><p class="rv" data-i18n="aboutP1"></p><p class="rv" data-i18n="aboutP2"></p><p class="rv" data-i18n="aboutP3"></p></div></div>
+      <div class="about-col"><p class="about-txt rv" data-i18n="aboutTxt"></p><div class="about-body"><p class="rv" data-i18n="aboutP1"></p><p class="rv" data-i18n="aboutP2"></p><p class="rv" data-i18n="aboutP3"></p></div><div id="traj"></div></div>
     </div>
     <span class="cap rv" data-i18n="practice">Prática</span>
     <div class="vert-grid">
@@ -395,6 +414,7 @@ a.ph{display:block;cursor:pointer}
   <section class="closing" id="contato">
     <h2 class="rv" data-i18n-html="closing">Vamos filmar algo <em>juntos?</em></h2>
     <a class="mail rv" href="mailto:contato@aquilaoliveira.com">contato@aquilaoliveira.com</a>
+    <a class="whats cap rv" href="https://wa.me/5571986744015" target="_blank" rel="noopener"><span data-i18n="whats">WhatsApp</span> · +55 71 98674-4015</a>
   </section>
   <footer class="cap mute">
     <span>© 2026 Áquila Oliveira · Salvador, BA</span>
@@ -406,6 +426,7 @@ a.ph{display:block;cursor:pointer}
 <main id="trabalhos" class="page">
   <section class="works-top">
     <h1 class="rv" data-i18n="works">Trabalhos</h1>
+    <p class="stats cap mute rv" data-i18n="stats">51 obras · 4 frentes · 2014 — 2026</p>
     <div class="filters rv" id="filters"></div>
   </section>
   <section id="grid"></section>
@@ -418,30 +439,9 @@ a.ph{display:block;cursor:pointer}
 <!-- ================= PROJETO ================= -->
 <main id="projeto" class="page"></main>
 
+<script src="js/projetos.js"></script>
 <script>
 /* ---------------- Data ---------------- */
-const CATS = {
-  todos:{pt:"Todos",en:"All"},
-  campanhas:{pt:"Campanhas & Marcas",en:"Campaigns & Brands"},
-  musica:{pt:"Música & Cultura",en:"Music & Culture"},
-  filmes:{pt:"Filmes & Documentários",en:"Films & Documentaries"},
-  realtime:{pt:"Real Time & Eventos",en:"Real Time & Events"},
-  institucional:{pt:"Institucional",en:"Institutional"}
-};
-const P = [
-  {id:"afropunk",t:"AFROPUNK",client:"AFROPUNK Bahia",cat:"realtime",role:{pt:"Vídeo Real Time",en:"Real-Time Video"},y:2026,feat:1,img:"afropunk1",bp:"50% 28%",stills:["afropunk2","palco1","palco2"],pal:["#0b1a2e","#2d5fb8","#cfe0ff"],pos:["50% 30%","80% 80%"]},
-  {id:"noite-eletrica",t:"Noite Elétrica",client:"Festival Ondas",cat:"realtime",role:{pt:"Direção ao vivo",en:"Live Direction"},y:2025,feat:1,img:"palco1",bp:"50% 40%",stills:["perfil","palco2","estudio"],pal:["#0c0420","#4b1ea8","#ff3d8b"],pos:["50% 30%","85% 75%"]},
-  {id:"corpo-de-rua",t:"Corpo de Rua",client:"Selo Ilê Sonoro",cat:"musica",role:{pt:"Direção & Fotografia",en:"Direction & Cinematography"},y:2025,pal:["#1a0710","#9c1f3c","#ff8a4c"],pos:["30% 35%","80% 80%"]},
-  {id:"palco-aberto",t:"Palco Aberto",client:"Casa 7",cat:"realtime",role:{pt:"Operações Criativas",en:"Creative Operations"},y:2024,feat:1,img:"palco2",bp:"50% 35%",stills:["palco1","hero","perfil"],pal:["#170612","#8a1a5c","#ffb36b"],pos:["40% 25%","75% 80%"]},
-  {id:"mare-alta",t:"Maré Alta",client:"Atlântica",cat:"campanhas",role:{pt:"Direção",en:"Direction"},y:2026,feat:1,pal:["#06222b","#0e6f7a","#f3c58a"],pos:["78% 22%","15% 85%"]},
-  {id:"ladeira",t:"Ladeira",client:"Mar Aberto Records",cat:"musica",role:{pt:"Direção",en:"Direction"},y:2024,pal:["#0f1a0d","#3d6b2a","#e0f08a"],pos:["75% 30%","20% 70%"]},
-  {id:"azul-de-itapua",t:"Azul de Itapuã",client:"Sal Têxtil",cat:"campanhas",role:{pt:"Direção",en:"Direction"},y:2024,pal:["#04121f","#1546a0","#8fd1ff"],pos:["30% 25%","80% 85%"]},
-  {id:"estrutura",t:"Estrutura",client:"Festival Ondas",cat:"realtime",role:{pt:"Operações Criativas",en:"Creative Operations"},y:2024,feat:1,img:"estudio",bp:"50% 30%",stills:["head","perfil","palco1"],pal:["#0d0d0d","#3a3a3a","#bdbdbd"],pos:["65% 35%","25% 80%"]},
-  {id:"cidade-baixa",t:"Cidade Baixa",client:"Fundação Ponte",cat:"institucional",role:{pt:"Direção",en:"Direction"},y:2023,pal:["#1a1309","#7a5a1c","#e8c77a"],pos:["70% 40%","20% 80%"]},
-  {id:"terreiro",t:"Terreiro",client:"Curta-metragem",cat:"filmes",role:{pt:"Roteiro & Direção",en:"Writing & Direction"},y:2023,pal:["#140805","#6b2410","#d8833f"],pos:["55% 45%","10% 90%"]},
-  {id:"origem",t:"Origem",client:"Instituto Recôncavo",cat:"institucional",role:{pt:"Direção",en:"Direction"},y:2022,pal:["#0d0d0d","#4a3a2e","#d9c3a5"],pos:["65% 35%","25% 80%"]}
-];
-const LOGOS = ["Governo Federal", "Sony Music", "ChatGPT", "AFROPUNK", "TV Globo", "Bayer", "Leroy Merlin", "Seda", "Petrobahia", "IDW", "Devassa", "Gotemburgo Volvo", "UniFTC", "Afrolatin Travels", "Confederação Baiana de Triathlon", "Anitta", "Ludmilla", "Xande de Pilares", "Xanddy Harmonia", "Tony Salles", "Parangolé", "Olodum", "Filhos de Jorge", "Dellacruz", "Italo Melo", "Emicida", "Ery Dantas", "Aquafina"].map(n=>[n,""]);
 const T = {
   pt:{works:"Trabalhos",about:"Sobre",contact:"Contato",close:"Fechar",view:"Ver projeto",scroll:"Role ↓",
     heroTag:"Foto editorial · Áquila olhando para o lado",r1:"Diretor Audiovisual",r2:"Artista Visual",r3:"Gestor de Operações Criativas",
@@ -452,7 +452,7 @@ const T = {
     closing:"Vamos filmar algo <em>juntos?</em>",
     manifesto:"Filmo o que não cabe em palavras: a luz, o gesto e o tempo de quem está diante da câmera.",
     client:"Cliente",category:"Categoria",role:"Função",year:"Ano",next:"Próximo projeto",empty:"Nenhum projeto nesta categoria — ainda.",
-    lead:"Um filme sobre pertencimento, filmado em luz natural entre o fim da tarde e a primeira hora da noite.",still:"Still"},
+    still:"Still",stats:"51 obras · 4 frentes · 2014 — 2026",traj:"Trajetória",form:"Formação",watch:"Assista",soon:"Vídeo e imagens em breve.",front:"Frente",group:"Grupo",whats:"WhatsApp"},
   en:{works:"Work",about:"About",contact:"Contact",close:"Close",view:"View project",scroll:"Scroll ↓",
     heroTag:"Editorial photo · Áquila looking aside",r1:"Film Director",r2:"Visual Artist",r3:"Creative Operations Lead",
     aboutTxt:"Áquila Oliveira is a film director, visual artist and creative operations lead with more than 10 years of experience in the industry.",aboutP1:"His work spans creative direction, advertising, film, music, culture and political communication. He has made advertising, institutional and electoral campaigns, as well as music videos and projects for brands and artists across different fields. With a multidisciplinary practice, he connects creativity, technology and strategy to turn ideas into visual narratives with impact. He masters every stage of production, from directing and camera operation to editing, motion design, sound effects and 2D and 3D animation.",aboutP2:"Throughout his career he has worked with brands and institutions such as the Brazilian Federal Government, Sony Music, ChatGPT, AFROPUNK, TV Globo, Bayer, Leroy Merlin, Seda, Petrobahia, IDW, Devassa, Gotemburgo Volvo, UniFTC, Afrolatin Travels and the Bahia Triathlon Confederation. He has also delivered Carnival projects with artists such as Anitta, Ludmilla and Xande de Pilares, and directed music videos for Xanddy Harmonia, Tony Salles, Parangolé, Olodum, Filhos de Jorge, Dellacruz and Italo Melo. He leads a team of advertising, marketing and film professionals, ensuring quality, efficiency and a strategic approach in every delivery.",aboutP3:"In music, he works as an executive producer and is part of the group Primeira Capital. He believes in film as a tool for expression, connection and social transformation, and works to bring brands and audiences together in an authentic, memorable way.",onset:"On set",onsetHint:"Click a photo to see the project",selected:"Selected work",allWorks:"See all work →",practice:"Practice",clients:"Clients & partners",
@@ -462,7 +462,7 @@ const T = {
     closing:"Shall we film something <em>together?</em>",
     manifesto:"I film what words can't hold: the light, the gesture and the time of whoever stands before the camera.",
     client:"Client",category:"Category",role:"Role",year:"Year",next:"Next project",empty:"No projects in this category — yet.",
-    lead:"A film about belonging, shot in natural light between late afternoon and the first hour of night.",still:"Still"}
+    still:"Still",stats:"51 works · 4 fields · 2014 — 2026",traj:"Career",form:"Education",watch:"Watch",soon:"Video and images coming soon.",front:"Field",group:"Group",whats:"WhatsApp"}
 };
 
 /* ---------------- State & helpers ---------------- */
@@ -477,11 +477,12 @@ const ph = (p, tag="", single=false) => {
   const dir = (slideSeq++ % 2) ? "r" : "l";
   const style = `--c1:${p.pal[0]};--c2:${p.pal[1]};--c3:${p.pal[2]};--p1:${p.pos[0]};--p2:${p.pos[1]};--bp:${p.bp||"center"}`;
   const layers = imgs.length
-    ? imgs.map((n,i)=>`<i class="sl${i===0?" on":""}" style="background-image:url(images/${n}.jpg)"></i>`).join("")
+    ? imgs.map((n,i)=>`<i class="sl${i===0?" on":""}${n.startsWith("projetos/")?" art":""}" style="background-image:url(images/${n}.jpg)"></i>`).join("")
     : `<i class="drift"></i>`;
   return `<div class="ph clip${imgs.length?" im":""} kb-${dir}"${imgs.length>1?` data-slides="${imgs.length}"`:""} style="${style}">${layers}${tag?`<span class="tag">${tag}</span>`:""}</div>`;
 };
 const cat = c => CATS[c][lang];
+const sub = p => (SUBS[p.sub] || {})[lang] || "";
 
 /* ---------------- Reveal observer ---------------- */
 const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }), {threshold:.12, rootMargin:"0px 0px -6% 0px"});
@@ -489,6 +490,7 @@ const observe = root => (root||document).querySelectorAll(".rv:not(.in),.clip:no
 
 /* ---------------- Renderers ---------------- */
 function renderI18n(){
+  setTimeout(renderTraj);
   document.documentElement.lang = lang === "pt" ? "pt-BR" : "en";
   $$("[data-i18n]").forEach(el => el.textContent = t(el.dataset.i18n));
   $$("[data-i18n-html]").forEach(el => el.innerHTML = t(el.dataset.i18nHtml));
@@ -497,13 +499,20 @@ function renderI18n(){
   manifesto();
 }
 function renderStrip(){
-  const seen = new Set(), items = [];
-  const add = (n, p) => { if(n && !seen.has(n)){ seen.add(n); items.push({n, p}); } };
-  P.forEach(p => add(p.img, p));                       // cada capa leva ao seu projeto
-  P.forEach(p => (p.stills||[]).forEach(n => add(n, p))); // fotos extras: primeiro projeto que as usa
-  const html = items.map(({n,p},i) => `<a class="shot ${i%3===1?"tall":i%3===2?"wide":""}" href="#/projeto/${p.id}" data-link data-hover>
-      <i style="background-image:url(images/${n}.jpg)"></i><span class="cap">${p.t}</span></a>`).join("");
+  const html = SET.map((it,i) => {
+    const p = P.find(x => x.id === it.to);
+    const href = p ? `#/projeto/${p.id}` : `#/${it.to}`;
+    const label = p ? p.t : (it.label || "");
+    return `<a class="shot ${i%3===1?"tall":i%3===2?"wide":""}" href="${href}" data-link data-hover>
+      <i style="background-image:url(images/${it.img}.jpg)"></i><span class="cap">${label}</span></a>`;
+  }).join("");
   $("#strip").innerHTML = html + html;
+}
+function renderTraj(){
+  const el = $("#traj"); if(!el) return;
+  el.innerHTML = `<span class="cap traj-h">${t("traj")}</span><ul class="traj">${TRAJ.map(x => `<li class="rv"><span class="cap mute">${x.y}</span><p>${x[lang]}</p></li>`).join("")}</ul>
+    <span class="cap traj-h">${t("form")}</span><p class="form rv">${FORMACAO[lang]}</p>`;
+  observe(el);
 }
 function renderFeat(){
   $("#featList").innerHTML = P.filter(p => p.feat).map((p,i) => `
@@ -512,7 +521,7 @@ function renderFeat(){
       <div class="proj-meta">
         <span class="num cap mute">0${i+1}</span>
         <div><h3 class="rv">${p.t}</h3>
-          <div class="line cap mute rv"><span>${p.client}</span><span>${cat(p.cat)}</span><span>${p.role[lang]}</span></div>
+          <div class="line cap mute rv"><span>${p.n}</span><span>${p.client}</span><span>${sub(p)}</span></div>
           <span class="mob-cta cap rv">${t("view")} →</span></div>
         <span class="cap mute rv">${p.y}</span>
       </div>
@@ -532,8 +541,8 @@ function renderFilters(){
 function card(p){
   return `<a class="card" href="#/projeto/${p.id}" data-link data-hover>
     ${ph(p)}
-    <div class="meta rv"><h3>${p.t}</h3><span class="cap mute">${p.y}</span></div>
-    <div class="sub cap mute rv">${p.client} · ${cat(p.cat)} · ${p.role[lang]}</div>
+    <div class="meta rv"><h3>${p.t}</h3><span class="cap mute">${p.n}</span></div>
+    <div class="sub cap mute rv">${[p.client, sub(p), p.y].filter(Boolean).join(" · ")}</div>
   </a>`;
 }
 function renderGrid(){
@@ -552,23 +561,29 @@ function renderGrid(){
 }
 function renderProject(id){
   const idx = Math.max(0, P.findIndex(p => p.id === id)), p = P[idx], nx = P[(idx+1) % P.length];
-  const v = (a,b,c) => ({...p, img:null, pal:[a,b,c]});
-  const st = (i, fb, tag) => p.stills && p.stills[i] ? ph({...p, img:p.stills[i], bp:"50% 35%"}, "", true) : ph(fb, tag);
+  const stills = (p.stills || []).filter(n => n !== p.img);
+  const embed = p.video ? `https://www.youtube.com/embed/${p.video}?rel=0` : p.vimeo ? `https://player.vimeo.com/video/${p.vimeo}` : "";
+  const media = embed
+    ? `<div class="video rv"><iframe src="${embed}" title="${p.t}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>`
+    : "";
+  const gallery = stills.length
+    ? `<div class="stills">${stills.map(n => ph({...p, img:n, bp:"50% 40%"}, "", true)).join("")}</div>`
+    : "";
   $("#projeto").innerHTML = `
-    <section class="p-hero">${ph(p, p.img ? "" : "Hero still / vídeo")}
-      <div class="txt"><span class="cap rv">${cat(p.cat)}</span><h1 class="rv">${p.t}</h1></div></section>
+    <section class="p-hero">${ph(p)}
+      <div class="txt"><span class="cap rv">${p.n} · ${cat(p.cat)}</span><h1 class="rv">${p.t}</h1></div></section>
     <section class="ficha">
       <div class="rv"><span class="cap mute">${t("client")}</span><p>${p.client}</p></div>
-      <div class="rv"><span class="cap mute">${t("category")}</span><p>${cat(p.cat)}</p></div>
+      <div class="rv"><span class="cap mute">${t("group")}</span><p>${sub(p)}</p></div>
       <div class="rv"><span class="cap mute">${t("role")}</span><p>${p.role[lang]}</p></div>
-      <div class="rv"><span class="cap mute">${t("year")}</span><p>${p.y}</p></div>
+      <div class="rv"><span class="cap mute">${t("year")}</span><p>${p.y || "—"}</p></div>
     </section>
     <section class="p-body">
-      <p class="lead rv">${t("lead")}</p>
-      ${st(0, {...p,img:null,pos:[p.pos[1],p.pos[0]]}, t("still")+" 01")}
-      <div class="duo">${st(1, v(p.pal[0],p.pal[2],p.pal[1]), t("still")+" 02")}${st(2, v("#050505",p.pal[1],p.pal[0]), t("still")+" 03")}</div>
+      <p class="lead rv">${p.role[lang]}</p>
+      ${media}${gallery}
+      ${!media && !stills.length ? `<p class="soon cap mute rv">${t("soon")}</p>` : ""}
     </section>
-    <a class="next" href="#/projeto/${nx.id}" data-link data-hover><span class="cap mute">${t("next")}</span><h2>${nx.t}</h2></a>
+    <a class="next" href="#/projeto/${nx.id}" data-link data-hover><span class="cap mute">${t("next")} · ${nx.n}</span><h2>${nx.t}</h2></a>
     <footer class="cap mute"><span>© 2026 Áquila Oliveira · Salvador, BA</span><div class="links"><a href="https://www.instagram.com/aquilaolvr/" target="_blank" rel="noopener">Instagram</a><a href="https://www.youtube.com/@aquilaolvr" target="_blank" rel="noopener">YouTube</a><a href="http://behance.net/aquilaolvr" target="_blank" rel="noopener">Behance</a><a href="https://www.linkedin.com/in/%C3%A1quila-oliveira-b5578518a/" target="_blank" rel="noopener">LinkedIn</a></div></footer>`;
   observe($("#projeto"));
 }
