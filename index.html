@@ -201,8 +201,8 @@ footer .links{display:flex;gap:22px}
 }
 
 /* ---------- Projeto ---------- */
-.p-hero{position:relative;height:100svh}
-.p-hero .ph{position:absolute;inset:0}
+.p-hero{position:relative;padding:0 var(--gut)}
+.p-hero .ph{position:relative;aspect-ratio:16/9;max-height:64vh;margin:0 auto}
 .p-hero .ph::before{background:linear-gradient(to top, rgba(0,0,0,.8),transparent 55%)}
 .p-hero .txt{position:absolute;z-index:3;left:var(--gut);right:var(--gut);bottom:32px}
 .p-hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(60px,12vw,190px);line-height:.88;letter-spacing:-.025em;margin-top:14px}
@@ -311,6 +311,27 @@ a.ph{display:block;cursor:pointer}
 .ph i.sl.art{inset:0;transform-origin:100% 0;animation:art 14s ease-in-out infinite alternate!important}
 @keyframes art{from{transform:scale(1)}to{transform:scale(1.05)}}
 .p-hero .ph i.sl.art{background-size:contain!important;background-color:#0a0a0a}
+
+/* ---------- Grade de 3 com thumbs em vídeo ---------- */
+.grid3{display:grid;grid-template-columns:1fr 1fr;gap:32px 12px;padding:0 var(--gut);margin-top:6vh}
+@media (min-width:640px){ .grid3{gap:44px var(--gut)} }
+@media (max-width:639px){ .grid3 .card h3{font-size:19px} .grid3 .card .meta .cap{display:none} .grid3 .card .sub{font-size:8.5px;letter-spacing:.12em} }
+@media (min-width:1000px){ .grid3{grid-template-columns:repeat(3,1fr)} }
+#grid .grid3{padding:0}
+.grid3 .card .ph{aspect-ratio:16/9}
+.grid3 .card h3{font-size:clamp(24px,2vw,32px);line-height:1.05}
+.grid3 .card .meta{margin-top:12px}
+.grid3 .card .sub{font-size:9.5px;line-height:1.6}
+.vthumb video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;clip-path:inset(100% 0 0 0);transition:clip-path 1.4s var(--ease),transform 1.4s var(--ease)}
+.vthumb.in video{clip-path:inset(0 0 0 0)}
+.card:hover .vthumb video{transform:scale(1.04)}
+.vthumb .live{position:absolute;z-index:2;top:10px;left:12px;font-size:9px;color:#fff;opacity:.85}
+.vthumb .live::first-letter{color:#e07a3a}
+.p-head{padding:18vh var(--gut) 5vh}
+.p-head h1{font-family:var(--serif);font-weight:400;font-size:clamp(44px,7vw,110px);line-height:.95;letter-spacing:-.02em;margin-top:12px}
+.p-hero .ph::before{display:none}
+.p-hero .ph i.sl.art{background-size:cover!important}
+@media (prefers-reduced-motion:reduce){ .vthumb video{clip-path:none!important} }
 </style>
 </head>
 <body>
@@ -367,7 +388,7 @@ a.ph{display:block;cursor:pointer}
 
   <section class="feat">
     <div class="sec-head rv"><span class="cap" data-i18n="selected">Trabalhos selecionados</span><span class="cap mute">2022 — 2026</span></div>
-    <div id="featList"></div>
+    <div id="featList" class="grid3"></div>
     <a href="#/trabalhos" data-link class="all-link cap rv" data-i18n="allWorks">Ver todos os trabalhos →</a>
   </section>
 
@@ -514,18 +535,8 @@ function renderTraj(){
   observe(el);
 }
 function renderFeat(){
-  $("#featList").innerHTML = P.filter(p => p.feat).map((p,i) => `
-    <a class="proj" href="#/projeto/${p.id}" data-link data-hover>
-      ${ph(p)}
-      <div class="proj-meta">
-        <span class="num cap mute">0${i+1}</span>
-        <div><h3 class="rv">${p.t}</h3>
-          <div class="line cap mute rv"><span>${p.n}</span><span>${p.client}</span><span>${sub(p)}</span></div>
-          <span class="mob-cta cap rv">${t("view")} →</span></div>
-        <span class="cap mute rv">${p.y}</span>
-      </div>
-    </a>`).join("");
-  observe($("#featList"));
+  $("#featList").innerHTML = P.filter(p => p.feat).map(card).join("");
+  observe($("#featList")); watchClips($("#featList"));
 }
 function renderMarquee(){
   const html = LOGOS.map(([n,s]) => `<span style="${s}">${n}</span>`).join("");
@@ -537,26 +548,29 @@ function renderFilters(){
     return `<button data-f="${k}" class="${k===filter?"on":""}">${cat(k)}<sup>${n}</sup></button>`;
   }).join("");
 }
+function thumb(p){
+  const poster = `images/${p.img}.jpg`;
+  if (!p.clip) return ph(p, "", true);
+  return `<div class="ph clip vthumb"><video src="video/${p.clip}.mp4" poster="${poster}" muted loop playsinline preload="none"></video><span class="live cap">● Vídeo</span></div>`;
+}
 function card(p){
   return `<a class="card" href="#/projeto/${p.id}" data-link data-hover>
-    ${ph(p)}
+    ${thumb(p)}
     <div class="meta rv"><h3>${p.t}</h3><span class="cap mute">${p.n}</span></div>
     <div class="sub cap mute rv">${[p.client, sub(p), p.y].filter(Boolean).join(" · ")}</div>
   </a>`;
 }
+/* Vídeos das thumbs: tocam só quando aparecem na tela */
+const vio = new IntersectionObserver(es => es.forEach(e => {
+  const v = e.target;
+  if (e.isIntersecting) { v.preload = "auto"; const pr = v.play(); if (pr) pr.catch(()=>{}); } else v.pause();
+}), {threshold:.25});
+function watchClips(root){ (root||document).querySelectorAll("video").forEach(v => vio.observe(v)); }
 function renderGrid(){
   const list = filter === "todos" ? P : P.filter(p => p.cat === filter);
   if(!list.length){ $("#grid").innerHTML = `<p class="empty">${t("empty")}</p>`; return; }
-  let html = "", i = 0, pairN = 0;
-  while(i < list.length){
-    html += `<div class="row full">${card(list[i++])}</div>`;
-    if(i < list.length){
-      const pair = list.slice(i, i+2); i += 2;
-      html += `<div class="row pair ${pairN++ % 2 ? "rev" : ""}">${pair.map(card).join("")}</div>`;
-    }
-  }
-  $("#grid").innerHTML = html;
-  observe($("#grid"));
+  $("#grid").innerHTML = `<div class="grid3">${list.map(card).join("")}</div>`;
+  observe($("#grid")); watchClips($("#grid"));
 }
 function renderProject(id){
   const idx = Math.max(0, P.findIndex(p => p.id === id)), p = P[idx], nx = P[(idx+1) % P.length];
@@ -569,8 +583,8 @@ function renderProject(id){
     ? `<div class="stills">${stills.map(n => ph({...p, img:n, bp:"50% 40%"}, "", true)).join("")}</div>`
     : "";
   $("#projeto").innerHTML = `
-    <section class="p-hero">${ph(p)}
-      <div class="txt"><span class="cap rv">${p.n} · ${cat(p.cat)}</span><h1 class="rv">${p.t}</h1></div></section>
+    <section class="p-head"><span class="cap rv">${p.n} · ${cat(p.cat)}</span><h1 class="rv">${p.t}</h1></section>
+    <section class="p-hero">${p.clip ? `<div class="ph clip vthumb"><video src="video/${p.clip}.mp4" poster="images/${p.img}.jpg" muted loop playsinline autoplay></video></div>` : ph(p)}</section>
     <section class="ficha">
       <div class="rv"><span class="cap mute">${t("client")}</span><p>${p.client}</p></div>
       <div class="rv"><span class="cap mute">${t("group")}</span><p>${sub(p)}</p></div>
@@ -584,7 +598,7 @@ function renderProject(id){
     </section>
     <a class="next" href="#/projeto/${nx.id}" data-link data-hover><span class="cap mute">${t("next")} · ${nx.n}</span><h2>${nx.t}</h2></a>
     <footer class="cap mute"><span>© 2026 Áquila Oliveira · Salvador, BA</span><div class="links"><a href="https://www.instagram.com/aquilaolvr/" target="_blank" rel="noopener">Instagram</a><a href="https://www.youtube.com/@aquilaolvr" target="_blank" rel="noopener">YouTube</a><a href="http://behance.net/aquilaolvr" target="_blank" rel="noopener">Behance</a><a href="https://www.linkedin.com/in/%C3%A1quila-oliveira-b5578518a/" target="_blank" rel="noopener">LinkedIn</a></div></footer>`;
-  observe($("#projeto"));
+  observe($("#projeto")); watchClips($("#projeto"));
 }
 
 /* ---------------- Manifesto (word by word on scroll) ---------------- */

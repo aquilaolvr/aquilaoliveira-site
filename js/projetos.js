@@ -12,6 +12,7 @@
      y       ano ou período (texto livre)
      img     capa (caminho dentro de images/, sem .jpg)
      stills  mais fotos do projeto (viram galeria)
+     clip    loop curto da thumb (arquivo em video/, sem .mp4) — toca sozinho, sem som
      video   ID do vídeo no YouTube (ex.: "dQw4w9WgXcQ") — opcional
      vimeo   ID do vídeo no Vimeo — opcional
      feat    1 = aparece nos destaques da Home
@@ -41,7 +42,7 @@ const cover = n => "projetos/" + n.replace(".", "-");
 
 const P = [
   /* ---------- 02 · Televisão e videoclipes ---------- */
-  { n: "02.01", id: "mosaico-baiano", t: "Mosaico Baiano", client: "Rede Bahia", cat: "tv", sub: "televisao", y: "2026 –", feat: 1,
+  { n: "02.01", id: "mosaico-baiano", feat: 1, t: "Mosaico Baiano", client: "Rede Bahia", cat: "tv", sub: "televisao", y: "2026 –",
     role: r("Direção da equipe de edição", "Head of the editing team") },
   { n: "02.02", id: "conexao-bahia", t: "Conexão Bahia", client: "Rede Bahia", cat: "tv", sub: "televisao", y: "2026 –",
     role: r("Direção da equipe de edição", "Head of the editing team") },
@@ -49,7 +50,7 @@ const P = [
     role: r("Conteúdo exibido no programa", "Content aired on the show") },
   { n: "02.04", id: "vem-carnaval", t: "Vem Carnaval!", client: "Globo Esporte BA / TV Bahia", cat: "tv", sub: "televisao", y: "",
     role: r("Conteúdo exibido no programa", "Content aired on the show") },
-  { n: "02.05", id: "olodum", t: "Olodum", client: "Olodum", cat: "tv", sub: "clipe", y: "", feat: 1, role: r("Videoclipe", "Music video") },
+  { n: "02.05", id: "olodum", clip: "olodum", feat: 1, t: "Olodum", client: "Olodum", cat: "tv", sub: "clipe", y: "", role: r("Videoclipe", "Music video") },
   { n: "02.06", id: "parangole", t: "Parangolé", client: "Parangolé", cat: "tv", sub: "clipe", y: "", role: r("Videoclipe", "Music video") },
   { n: "02.07", id: "e-o-tchan", t: "É o Tchan", client: "É o Tchan", cat: "tv", sub: "clipe", y: "", role: r("Videoclipe", "Music video") },
   { n: "02.08", id: "xandy-harmonia", t: "Xandy Harmonia", client: "Harmonia do Samba", cat: "tv", sub: "clipe", y: "", role: r("Videoclipe", "Music video") },
@@ -59,16 +60,16 @@ const P = [
   { n: "02.11", id: "igor-kannario", t: "Igor Kannário", client: "Igor Kannário", cat: "tv", sub: "clipe", y: "", role: r("Videoclipe", "Music video") },
 
   /* ---------- 03 · Aftermovies e eventos ---------- */
-  { n: "03.01", id: "festival-de-verao", t: "Festival de Verão", client: "Gamboa / Bahia Eventos", cat: "eventos", sub: "divulgacao", y: "2023 e 2025",
+  { n: "03.01", id: "festival-de-verao", clip: "festival-de-verao", feat: 1, t: "Festival de Verão", client: "Gamboa / Bahia Eventos", cat: "eventos", sub: "divulgacao", y: "2023 e 2025",
     role: r("Animação gráfica da pré-divulgação oficial, VTs para televisão e chamadas comerciais", "Graphic animation for the official pre-launch, TV spots and commercials") },
-  { n: "03.02", id: "afropunk-brasil", t: "AFROPUNK Brasil", client: "AFROPUNK · Salvador", cat: "eventos", sub: "divulgacao", y: "2022 – 2026",
+  { n: "03.02", id: "afropunk-brasil", clip: "afropunk-brasil", feat: 1, t: "AFROPUNK Brasil", client: "AFROPUNK · Salvador", cat: "eventos", sub: "divulgacao", y: "2022 – 2026",
     role: r("Animação gráfica de pré-divulgação, matérias para TV e vídeos de palco desde a primeira edição", "Pre-launch graphic animation, TV features and stage videos since the first edition") },
-  { n: "03.03", id: "beyonce-renaissance", t: "Beyoncé — Renaissance", client: "Salvador", cat: "eventos", sub: "cobertura", y: "", feat: 1,
+  { n: "03.03", id: "beyonce-renaissance", t: "Beyoncé — Renaissance", client: "Salvador", cat: "eventos", sub: "cobertura", y: "",
     role: r("Cobertura em tempo real", "Real-time coverage") },
-  { n: "03.04", id: "afropunk-2026", t: "AFROPUNK Brasil 2026", client: "AFROPUNK · IDW", cat: "eventos", sub: "cobertura", y: "2026", feat: 1,
+  { n: "03.04", id: "afropunk-2026", feat: 1, t: "AFROPUNK Brasil 2026", client: "AFROPUNK · IDW", cat: "eventos", sub: "cobertura", y: "2026",
     role: r("Vídeos de palco pela IDW · vídeo real time", "Stage videos for IDW · real-time video"),
     img: "afropunk1", bp: "50% 28%", stills: ["projetos/03-04", "afropunk2", "set/afropunk-retrato", "palco1", "palco2", "perfil", "set/estrutura-laranja"] },
-  { n: "03.05", id: "festival-de-verao-uniftc", t: "Festival de Verão · UniFTC", client: "Gamboa / Bahia Eventos", cat: "eventos", sub: "cobertura", y: "",
+  { n: "03.05", id: "festival-de-verao-uniftc", clip: "festival-de-verao-uniftc", feat: 1, t: "Festival de Verão · UniFTC", client: "Gamboa / Bahia Eventos", cat: "eventos", sub: "cobertura", y: "",
     role: r("Cobertura com entrega no mesmo dia para a UniFTC", "Same-day delivery coverage for UniFTC") },
   { n: "03.06", id: "budweiser-afropunk", t: "Budweiser AFROPUNK", client: "Budweiser", cat: "eventos", sub: "cobertura", y: "",
     role: r("Cobertura com entrega no mesmo dia", "Same-day delivery coverage") },
@@ -84,7 +85,7 @@ const P = [
     role: r("Filme pós-evento", "Post-event film") },
 
   /* ---------- 04 · Publicidade e institucional ---------- */
-  { n: "04.01", id: "o-encontro-2026", t: "O Encontro 2026", client: "Dendezeiro × AFROPUNK × ChatGPT", cat: "publicidade", sub: "marcas", y: "2026", feat: 1,
+  { n: "04.01", id: "o-encontro-2026", feat: 1, t: "O Encontro 2026", client: "Dendezeiro × AFROPUNK × ChatGPT", cat: "publicidade", sub: "marcas", y: "2026",
     role: r("Conteúdo de marca · edição · cliente IDW · publicado no perfil do AFROPUNK Brasil", "Branded content · editing · client IDW · published on AFROPUNK Brasil's profile") },
   { n: "04.02", id: "petrobahia", t: "Petrobahia", client: "Petrobahia", cat: "publicidade", sub: "marcas", y: "",
     role: r("Vídeos institucionais", "Institutional videos") },
@@ -92,11 +93,11 @@ const P = [
   { n: "04.04", id: "devassa", t: "Devassa", client: "Devassa", cat: "publicidade", sub: "marcas", y: "", role: r("Conteúdo de marca", "Branded content") },
   { n: "04.05", id: "gotemburgo-volvo", t: "Gotemburgo Volvo", client: "Gotemburgo Volvo", cat: "publicidade", sub: "marcas", y: "", role: r("Conteúdo de marca", "Branded content") },
   { n: "04.06", id: "belov-engenharia", t: "Belov Engenharia", client: "Belov Engenharia", cat: "publicidade", sub: "marcas", y: "", role: r("Institucional", "Institutional") },
-  { n: "04.07", id: "hiperideal", t: "Hiperideal", client: "Hiperideal", cat: "publicidade", sub: "marcas", y: "", role: r("Conteúdo de marca", "Branded content") },
+  { n: "04.07", id: "hiperideal", clip: "hiperideal", feat: 1, t: "Hiperideal", client: "Hiperideal", cat: "publicidade", sub: "marcas", y: "", role: r("Conteúdo de marca", "Branded content") },
   { n: "04.08", id: "mamma-jamma", t: "Mamma Jamma", client: "Mamma Jamma", cat: "publicidade", sub: "marcas", y: "", role: r("Conteúdo de marca", "Branded content") },
   { n: "04.09", id: "uniftc", t: "UniFTC", client: "UniFTC", cat: "publicidade", sub: "marcas", y: "", role: r("Institucional e campanhas", "Institutional & campaigns") },
   { n: "04.10", id: "unex", t: "UNEX", client: "UNEX", cat: "publicidade", sub: "marcas", y: "", role: r("Institucional e campanhas", "Institutional & campaigns") },
-  { n: "04.11", id: "salesiano", t: "Salesiano", client: "Salesiano", cat: "publicidade", sub: "marcas", y: "", role: r("Institucional e conteúdo educativo", "Institutional & educational content") },
+  { n: "04.11", id: "salesiano", clip: "salesiano", feat: 1, t: "Salesiano", client: "Salesiano", cat: "publicidade", sub: "marcas", y: "", role: r("Institucional e conteúdo educativo", "Institutional & educational content") },
   { n: "04.12", id: "professora-profissao-dignidade", t: "Professora, Profissão Dignidade", client: "Documentário", cat: "publicidade", sub: "doc", y: "jun. 2025 –",
     role: r("Documentário · em andamento", "Documentary · in progress") },
   { n: "04.13", id: "koko-banda-lordao", t: "Kokó — Banda Lordão", client: "42 Polegadas", cat: "publicidade", sub: "doc", y: "2022",
