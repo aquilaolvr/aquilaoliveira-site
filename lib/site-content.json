@@ -1,0 +1,178 @@
+{
+ "set": [
+  {
+   "img": "/media/images/set/afropunk-retrato.jpg",
+   "to": "afropunk-2026"
+  },
+  {
+   "img": "/media/images/set/monitor.jpg",
+   "to": "delacruz"
+  },
+  {
+   "img": "/media/images/set/estrutura-laranja.jpg",
+   "to": "afropunk-2026"
+  },
+  {
+   "img": "/media/images/set/beira-mar.jpg",
+   "to": "delacruz"
+  },
+  {
+   "img": "/media/images/afropunk2.jpg",
+   "to": "afropunk-2026"
+  },
+  {
+   "img": "/media/images/set/headset-pb.jpg",
+   "to": "delacruz"
+  },
+  {
+   "img": "/media/images/set/primeira-capital.jpg",
+   "to": "sobre",
+   "label": "Primeira Capital · África do Sul"
+  },
+  {
+   "img": "/media/images/palco1.jpg",
+   "to": "afropunk-2026"
+  },
+  {
+   "img": "/media/images/set/estabilizador-laranja.jpg",
+   "to": "delacruz"
+  },
+  {
+   "img": "/media/images/set/estudio-pb.jpg",
+   "to": "sobre",
+   "label": "Estúdio"
+  },
+  {
+   "img": "/media/images/perfil.jpg",
+   "to": "afropunk-2026"
+  },
+  {
+   "img": "/media/images/set/corredor.jpg",
+   "to": "delacruz"
+  },
+  {
+   "img": "/media/images/set/primeira-capital-2.jpg",
+   "to": "sobre",
+   "label": "Primeira Capital · África do Sul"
+  },
+  {
+   "img": "/media/images/set/camera-laranja.jpg",
+   "to": "delacruz"
+  }
+ ],
+ "traj": [
+  {
+   "y": "2026 –",
+   "pt": "Direção da equipe de edição — Mosaico Baiano e Conexão Bahia, Rede Bahia",
+   "en": "Head of the editing team — Mosaico Baiano and Conexão Bahia, Rede Bahia"
+  },
+  {
+   "y": "jun. 2025 – jun. 2026",
+   "pt": "Comunicação audiovisual do mandato do vereador Hamilton Assis",
+   "en": "Video communication for city councillor Hamilton Assis"
+  },
+  {
+   "y": "2021 – 2024",
+   "pt": "Editor de vídeo e designer de animação gráfica — 42 Polegadas",
+   "en": "Video editor and motion designer — 42 Polegadas"
+  },
+  {
+   "y": "2018",
+   "pt": "Primeiros trabalhos em campanhas — vídeo e design",
+   "en": "First campaign work — video and design"
+  },
+  {
+   "y": "2014 –",
+   "pt": "Diretor e realizador audiovisual autônomo",
+   "en": "Independent director and filmmaker"
+  }
+ ],
+ "formacao": {
+  "pt": "Técnico em Mecatrônica — SENAI CIMATEC",
+  "en": "Mechatronics Technician — SENAI CIMATEC"
+ },
+ "logos": [
+  "Rede Bahia",
+  "TV Globo",
+  "Globo Esporte",
+  "Governo Federal",
+  "Sony",
+  "ChatGPT",
+  "AFROPUNK",
+  "IDW",
+  "Budweiser",
+  "Seda",
+  "Petrobahia",
+  "Devassa",
+  "Gotemburgo Volvo",
+  "Hiperideal",
+  "UniFTC",
+  "UNEX",
+  "Olodum",
+  "Parangolé",
+  "É o Tchan",
+  "Harmonia do Samba",
+  "Filhos de Jorge",
+  "Delacruz",
+  "Igor Kannário",
+  "Anitta",
+  "Governo da Bahia",
+  "SECULT-BA"
+ ],
+ "cats": {
+  "todos": {
+   "pt": "Todos",
+   "en": "All"
+  },
+  "tv": {
+   "pt": "Televisão & Videoclipes",
+   "en": "Television & Music Videos"
+  },
+  "eventos": {
+   "pt": "Aftermovies & Eventos",
+   "en": "Aftermovies & Events"
+  },
+  "publicidade": {
+   "pt": "Publicidade & Institucional",
+   "en": "Advertising & Institutional"
+  },
+  "politica": {
+   "pt": "Comunicação Política",
+   "en": "Political Communication"
+  }
+ },
+ "subs": {
+  "televisao": {
+   "pt": "Televisão",
+   "en": "Television"
+  },
+  "clipe": {
+   "pt": "Videoclipe",
+   "en": "Music video"
+  },
+  "divulgacao": {
+   "pt": "Divulgação de festival",
+   "en": "Festival promotion"
+  },
+  "cobertura": {
+   "pt": "Cobertura em tempo real",
+   "en": "Real-time coverage"
+  },
+  "marcas": {
+   "pt": "Marcas e empresas",
+   "en": "Brands & companies"
+  },
+  "doc": {
+   "pt": "Documentário",
+   "en": "Documentary"
+  },
+  "publico": {
+   "pt": "Setor público",
+   "en": "Public sector"
+  },
+  "politica": {
+   "pt": "Campanhas e mandatos",
+   "en": "Campaigns & mandates"
+  }
+ }
+}

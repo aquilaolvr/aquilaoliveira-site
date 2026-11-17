@@ -1,0 +1,48 @@
+name: Worker (Frame.io → thumbs → rascunho)
+
+on:
+  repository_dispatch:
+    types: [worker-run]        # disparado pelo webhook e pelo admin (GITHUB_DISPATCH_TOKEN)
+  schedule:
+    - cron: "*/5 * * * *"      # a cada 5 min: pega o que ficou na fila (e faz o polling se FRAMEIO_POLL=true)
+  workflow_dispatch: {}
+
+concurrency:
+  group: worker
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - run: pip install -r worker/requirements.txt
+      - run: python -m worker once
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          FRAMEIO_CLIENT_ID: ${{ secrets.FRAMEIO_CLIENT_ID }}
+          FRAMEIO_CLIENT_SECRET: ${{ secrets.FRAMEIO_CLIENT_SECRET }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          FRAMEIO_AUTH_MODE: ${{ vars.FRAMEIO_AUTH_MODE }}
+          FRAMEIO_ACCOUNT_ID: ${{ vars.FRAMEIO_ACCOUNT_ID }}
+          FRAMEIO_FOLDER_ID: ${{ vars.FRAMEIO_FOLDER_ID }}
+          FRAMEIO_POLL: ${{ vars.FRAMEIO_POLL }}
+          STORE_FULL_VIDEO: ${{ vars.STORE_FULL_VIDEO }}
+
+  testes:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - run: pip install -r worker/requirements.txt
+      - run: python -m unittest worker.tests.test_pipeline -v
